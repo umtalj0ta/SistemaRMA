@@ -1,0 +1,89 @@
+@page "/pedidos"
+
+@using SistemaRMA.Models
+@using SistemaRMA.Services
+
+@inject RmaService RmaService
+
+@rendermode InteractiveServer
+
+<h3>Lista de Pedidos RMA</h3>
+
+@if (pedidos == null)
+{
+    // Enquanto aguarda a resposta da base de dados
+    <p>A carregar...</p>
+}
+else if (pedidos.Count == 0)
+{
+    <p>Não existem pedidos.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Equipamento</th>
+                <th>Número Série</th>
+                <th>Estado</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var pedido in pedidos)
+            {
+                // Percorre todos os pedidos devolvidos pelo servico e apresenta na tabela
+                <tr>
+                    <td>@pedido.ID</td>
+                    <td>@pedido.Equipamento</td>
+                    <td>@pedido.NumeroSerie</td>
+                    <td>@pedido.Estado</td>
+                    <td>@pedido.CriadoA</td>
+                    <td>
+                    <td>
+    <select class="form-select"
+            value="@pedido.Estado"
+            @onchange="(e) => AlterarEstado(pedido, e.Value?.ToString())">
+
+        <option>Novo</option>
+        <option>Em Análise</option>
+        <option>Aprovado Gestor</option>
+        <option>Aprovado Administrador</option>
+        <option>Rejeitado</option>
+        <option>Concluído</option>
+
+    </select>
+</td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    // Lista que vai armazenar os pedidos da base de dados
+    private List<PedidoRMA>? pedidos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pedidos = await RmaService.GetAllAsync();
+    }
+
+    private async Task AlterarEstado(PedidoRMA pedido, string? novoEstado)
+    {
+        if (novoEstado == null)
+            return;
+
+        pedido.Estado = novoEstado;
+
+        await RmaService.UpdateAsync(pedido);
+
+        pedidos = await RmaService.GetAllAsync();
+    }
+
+}

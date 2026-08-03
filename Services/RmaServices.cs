@@ -14,10 +14,23 @@ public class RmaService
     }
   public async Task CreateAsync(PedidoRMA request)
     {
-        _context.PedidosRma.Add(request);
+        _context.PedidosRma.Add(request);  //aqui so adiciona
+
+        await _context.SaveChangesAsync(); // aqui garda mesmo
+    }
+
+    public async Task<List<PedidoRMA>> GetAllAsync()
+    {
+        return await _context.PedidosRma.ToListAsync();   //tolist = select * from pedidosrma
+    }
+
+    public async Task UpdateAsync(PedidoRMA pedido)
+    {
+        _context.PedidosRma.Update(pedido);
 
         await _context.SaveChangesAsync();
     }
+
 
 }
 
