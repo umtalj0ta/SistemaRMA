@@ -1,0 +1,49 @@
+@page "/novo_pedido"
+@rendermode InteractiveServer
+@using SistemaRMA.Models
+@using SistemaRMA.Services
+@inject RmaService RmaService
+
+<h3>Novo Pedido RMA</h3>
+
+<EditForm Model="pedido"
+          OnValidSubmit="GuardarPedido"
+          FormName="PedidoRMA">
+
+    <div class="mb-3">
+        <label>Equipamento</label>
+        <InputText @bind-Value="pedido.Equipamento"
+                   class="form-control" />
+    </div>
+
+  <div class="mb-3">
+        <label>Número de Série</label>
+        <InputText @bind-Value="pedido.NumeroSerie"
+                   class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Descrição do Problema</label>
+        <InputTextArea @bind-Value="pedido.DescricaoProblema"
+                       class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+        Guardar Pedido
+    </button>
+
+</EditForm>  
+
+@code {
+    private PedidoRMA pedido = new();
+
+ private async Task GuardarPedido()
+{
+    pedido.CriadoA = DateTime.Now;
+    pedido.Estado = "Novo";
+
+    await RmaService.CreateAsync(pedido);
+
+    pedido = new PedidoRMA();
+}
+}
