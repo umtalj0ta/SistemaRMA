@@ -1,11 +1,14 @@
 using SistemaRMA.Components;
 using Microsoft.EntityFrameworkCore;
 using SistemaRMA.Data;
+using SistemaRMA.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<RmaService>();      
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaRMA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f49e31fcf8e4bd4a35c167d9be81137a735ff2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaRMA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaRMA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
