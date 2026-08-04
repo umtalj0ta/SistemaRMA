@@ -34,8 +34,16 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/jota/Desktop/projeto/SistemaRMA/Components/Pages/Administrador.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbmlzdHJhZG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/jota/Desktop/projeto/SistemaRMA/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/jota/Desktop/projeto/SistemaRMA/Components/Pages/Gestor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9HZXN0b3IucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/jota/Desktop/projeto/SistemaRMA/Components/Pages/Home.razor]

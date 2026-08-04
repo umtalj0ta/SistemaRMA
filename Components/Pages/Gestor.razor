@@ -1,4 +1,4 @@
-@page "/pedidos"
+@page "/gestor"
 
 @using SistemaRMA.Models
 @using SistemaRMA.Services
@@ -7,7 +7,7 @@
 
 @rendermode InteractiveServer
 
-<h3>Lista de Pedidos RMA</h3>
+<h3>Pedidos para Aprovação do Gestor</h3>
 
 @if (pedidos == null)
 {
@@ -15,7 +15,7 @@
 }
 else if (pedidos.Count == 0)
 {
-    <p>Não existem pedidos.</p>
+    <p>Não existem pedidos para aprovar.</p>
 }
 else
 {
@@ -27,6 +27,8 @@ else
                 <th>Número Série</th>
                 <th>Estado</th>
                 <th>Data</th>
+                <th>Descricao</th>
+                <th>Ação</th>
             </tr>
         </thead>
 
@@ -39,6 +41,14 @@ else
                     <td>@pedido.NumeroSerie</td>
                     <td>@pedido.Estado</td>
                     <td>@pedido.CriadoA</td>
+                    <td>@pedido.DescricaoProblema</td>
+
+                    <td>
+                        <button class="btn btn-success"
+                                @onclick="() => AprovarPedido(pedido)">
+                            Aprovar
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -47,11 +57,20 @@ else
 
 @code {
 
-    private List<PedidoRMA>? pedidos;
+    private List<PedidoRMA> pedidos = new();
 
     protected override async Task OnInitializedAsync()
     {
-        pedidos = await RmaService.GetAllAsync();
+        pedidos = await RmaService.GetByEstadoAsync("Novo");
+    }
+
+    private async Task AprovarPedido(PedidoRMA pedido)
+    {
+        pedido.Estado = "Aprovado Gestor";
+
+        await RmaService.UpdateAsync(pedido);
+
+        pedidos = await RmaService.GetByEstadoAsync("Novo");
     }
 
 }

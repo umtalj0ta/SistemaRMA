@@ -38,6 +38,13 @@ public class RmaService
         return await pedidos.ToListAsync();
     }
 
+    public async Task<List<PedidoRMA>> GetByEstadoAsync (string estado)
+    {
+        var pedidos = _context.PedidosRma.Where(pedido => pedido.Estado == estado);
+
+        return await pedidos.ToListAsync();
+    }
+
 }
 
 

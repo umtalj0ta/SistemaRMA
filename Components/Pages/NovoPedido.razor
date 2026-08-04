@@ -42,6 +42,9 @@
 {
     pedido.CriadoA = DateTime.Now;
     pedido.Estado = "Novo";
+     // temporario até ter o login
+
+    pedido.CriadoPorID = "0596928a-a51c-421a-ba5c-abf4f81a1eb8";
 
     await RmaService.CreateAsync(pedido);
 
