@@ -4,6 +4,7 @@
 @using SistemaRMA.Services
 @inject RmaService RmaService
 
+
 <h3>Novo Pedido RMA</h3>
 
 <EditForm Model="pedido"
@@ -43,6 +44,7 @@
     pedido.Estado = "Novo";
 
     await RmaService.CreateAsync(pedido);
+
 
     pedido = new PedidoRMA();
 }

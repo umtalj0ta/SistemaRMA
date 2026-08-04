@@ -27,6 +27,11 @@ using (var scope = app.Services.CreateScope())
         .GetRequiredService<RoleManager<IdentityRole>>();
 
     await InicializadorPerfis.CriarPerfisAsync(roleManager);
+
+     var userManager = scope.ServiceProvider
+        .GetRequiredService<UserManager<IdentityUser>>();
+
+    await InicializadorUtilizadores.CriarUtilizadoresAsync(userManager);
 }
 
 // Configure the HTTP request pipeline.

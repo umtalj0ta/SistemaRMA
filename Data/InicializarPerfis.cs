@@ -4,15 +4,9 @@ namespace SistemaRMA.Data;
 
 public static class InicializadorPerfis
 {
-    public static async Task CriarPerfisAsync(
-        RoleManager<IdentityRole> roleManager)
+    public static async Task CriarPerfisAsync(RoleManager<IdentityRole> roleManager)
     {
-        string[] perfis =
-        {
-            "Utilizador",
-            "Gestor",
-            "Administrador"
-        };
+        string[] perfis = {"Utilizador", "Gestor", "Administrador"};
 
         foreach (var perfil in perfis)
         {

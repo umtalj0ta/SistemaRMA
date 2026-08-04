@@ -12,9 +12,9 @@ public class RmaService
     {
         _context = context;
     }
-  public async Task CreateAsync(PedidoRMA request)
+  public async Task CreateAsync(PedidoRMA pedido)
     {
-        _context.PedidosRma.Add(request);  //aqui so adiciona
+        _context.PedidosRma.Add(pedido);  //aqui so adiciona
 
         await _context.SaveChangesAsync(); // aqui garda mesmo
     }
@@ -31,6 +31,12 @@ public class RmaService
         await _context.SaveChangesAsync();
     }
 
+    public async Task<List<PedidoRMA>> GetByUserAsync (string UserId)
+    {
+        var pedidos = _context.PedidosRma.Where(pedido => pedido.CriadoPorID == UserId);
+
+        return await pedidos.ToListAsync();
+    }
 
 }
 
