@@ -1,6 +1,6 @@
 @page "/novo_pedido"
 @rendermode InteractiveServer // para a pagina ser interativa , os campos do form nao estavam a ser guardados
-@using SistemaRMA.Models
+@using SistemaRMA.Entities
 @using SistemaRMA.Services
 @inject RmaService RmaService
 
@@ -41,10 +41,10 @@
  private async Task GuardarPedido()
 {
     pedido.CriadoA = DateTime.Now;
-    pedido.Estado = "Novo";
+    pedido.EstadoId = 1;
      // temporario até ter o login
 
-    pedido.CriadoPorID = "0596928a-a51c-421a-ba5c-abf4f81a1eb8";
+    pedido.CriadoPorID = "313b010a-1490-42e7-af64-8b064b4f28fb";
 
     await RmaService.CreateAsync(pedido);
 

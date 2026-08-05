@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SistemaRMA.Models;
+using SistemaRMA.Entities;
 
 namespace SistemaRMA.Data;
 
@@ -12,4 +12,7 @@ public class AppDbContext : IdentityDbContext
     }
 
     public DbSet<PedidoRMA> PedidosRma { get; set; }
+
+    public DbSet<Estado> Estados {get; set;}
+
 }

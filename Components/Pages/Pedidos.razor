@@ -1,6 +1,6 @@
 @page "/pedidos"
 
-@using SistemaRMA.Models
+@using SistemaRMA.Entities
 @using SistemaRMA.Services
 
 @inject RmaService RmaService
@@ -37,7 +37,7 @@ else
                     <td>@pedido.ID</td>
                     <td>@pedido.Equipamento</td>
                     <td>@pedido.NumeroSerie</td>
-                    <td>@pedido.Estado</td>
+                    <td>@pedido.Estado.Nome</td>
                     <td>@pedido.CriadoA</td>
                 </tr>
             }

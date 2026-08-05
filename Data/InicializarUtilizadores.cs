@@ -38,7 +38,6 @@ public static class InicializadorUtilizadores
                     UserName = dados.Email,
                     Email = dados.Email
                 };
-                
                 await userManager.CreateAsync(user, dados.Password);  
         }
             var PertenceAoPerfil = await userManager.IsInRoleAsync(user, dados.Perfil);

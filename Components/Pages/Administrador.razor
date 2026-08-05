@@ -1,6 +1,6 @@
 @page "/administrador"
 
-@using SistemaRMA.Models
+@using SistemaRMA.Entities
 @using SistemaRMA.Services
 
 @inject RmaService RmaService
@@ -39,7 +39,7 @@ else
                     <td>@pedido.ID</td>
                     <td>@pedido.Equipamento</td>
                     <td>@pedido.NumeroSerie</td>
-                    <td>@pedido.Estado</td>
+                    <td>@pedido.Estado.Nome</td>
                     <td>@pedido.CriadoA</td>
                     <td>@pedido.DescricaoProblema</td>
 
@@ -61,16 +61,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        pedidos = await RmaService.GetByEstadoAsync("Aprovado Gestor");
+        pedidos = await RmaService.GetByEstadoAsync(2);
     }
 
     private async Task AprovarPedido(PedidoRMA pedido)
     {
-        pedido.Estado = "Aprovado Administrador";
+        pedido.EstadoId = 3;
 
         await RmaService.UpdateAsync(pedido);
 
-        pedidos = await RmaService.GetByEstadoAsync("Aprovado Gestor");
+        pedidos = await RmaService.GetByEstadoAsync(2);
     }
 
 }

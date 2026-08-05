@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace SistemaRMA.Models;
+namespace SistemaRMA.Entities;
 
 public class PedidoRMA
 {
@@ -14,9 +14,11 @@ public class PedidoRMA
 
     public DateTime CriadoA {get; set;} = DateTime.UtcNow;
 
-    public string Estado {get; set;} = "Pendente";
+    public int EstadoId {get; set;}
 
-    public string CriadoPorID {get; set;}
+    public Estado Estado {get; set;} = null!;
 
-    public IdentityUser CriadoPor{get; set;}
+    public string CriadoPorID {get; set;} = "";
+
+    public IdentityUser CriadoPor{get; set;} =null!;
 }
