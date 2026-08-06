@@ -6,45 +6,64 @@ namespace SistemaRMA.Services;
 
 public class RmaService
 {
-    public readonly AppDbContext _context;
+    //public readonly AppDbContext _context;
 
-    public RmaService (AppDbContext context)
+    private readonly IDbContextFactory<AppDbContext> _factory;
+
+    public RmaService (IDbContextFactory<AppDbContext> factory)
     {
-        _context = context;
+        _factory = factory;
     }
     public async Task CreateAsync(PedidoRMA pedido)
     {
-        _context.PedidosRma.Add(pedido);  //aqui so adiciona
+        await using var context = await _factory.CreateDbContextAsync();
 
-        await _context.SaveChangesAsync(); // aqui garda mesmo
-    }
+        context.PedidosRma.Add(pedido);
+
+        await context.SaveChangesAsync();
+    }   
 
     public async Task UpdateAsync(PedidoRMA pedido)
     {
-        _context.PedidosRma.Update(pedido);
+        await using var context = await _factory.CreateDbContextAsync();
 
-        await _context.SaveChangesAsync();    
+        var pedidoDb = await context.PedidosRma.FindAsync(pedido.ID);
+
+        if (pedidoDb == null)
+            return;
+
+        pedidoDb.EstadoId = pedido.EstadoId;
+
+        await context.SaveChangesAsync();
     }
 
     public async Task<List<PedidoRMA>> GetAllAsync()
     {
-        var pedidos = _context.PedidosRma.Include(p => p.Estado);
+        await using var context = await _factory.CreateDbContextAsync();
 
-        return await pedidos.ToListAsync();
+        return await context.PedidosRma
+            .Include(p => p.Estado)
+            .ToListAsync();
     }
 
     public async Task<List<PedidoRMA>> GetByUserAsync(string userId)
     {
-        var pedidos = _context.PedidosRma.Include(p => p.Estado).Where(p => p.CriadoPorID == userId);
+        await using var context = await _factory.CreateDbContextAsync();
 
-        return await pedidos.ToListAsync();
+        return await context.PedidosRma
+            .Include(p => p.Estado)
+            .Where(p => p.CriadoPorID == userId)
+            .ToListAsync();
     }
 
     public async Task<List<PedidoRMA>> GetByEstadoAsync(int estadoId)
     {
-        var pedidos = _context.PedidosRma.Include(p => p.Estado).Where(p => p.EstadoId == estadoId);
+        await using var context = await _factory.CreateDbContextAsync();
 
-        return await pedidos.ToListAsync();
+        return await context.PedidosRma
+            .Include(p => p.Estado)
+            .Where(p => p.EstadoId == estadoId)
+            .ToListAsync();
     }
 
 }
