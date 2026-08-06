@@ -13,11 +13,12 @@ builder.Services
     .AddIdentityCore<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();      
-
-builder.Services.AddScoped<RmaService>();      
-
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<RmaService>();
+builder.Services.AddScoped<EmailService>();      
+
 
 var app = builder.Build();
 

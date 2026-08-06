@@ -212,3 +212,6 @@
 /Users/jota/Desktop/projeto/SistemaRMA/obj/Debug/net10.0/SistemaRMA.pdb
 /Users/jota/Desktop/projeto/SistemaRMA/obj/Debug/net10.0/SistemaRMA.genruntimeconfig.cache
 /Users/jota/Desktop/projeto/SistemaRMA/obj/Debug/net10.0/ref/SistemaRMA.dll
+/Users/jota/Desktop/projeto/SistemaRMA/bin/Debug/net10.0/BouncyCastle.Cryptography.dll
+/Users/jota/Desktop/projeto/SistemaRMA/bin/Debug/net10.0/MailKit.dll
+/Users/jota/Desktop/projeto/SistemaRMA/bin/Debug/net10.0/MimeKit.dll

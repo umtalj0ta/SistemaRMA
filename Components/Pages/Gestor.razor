@@ -2,8 +2,8 @@
 
 @using SistemaRMA.Entities
 @using SistemaRMA.Services
-
 @inject RmaService RmaService
+@inject EmailService EmailService
 
 @rendermode InteractiveServer
 
@@ -69,6 +69,11 @@ else
         pedido.EstadoId = 2;
 
         await RmaService.UpdateAsync(pedido);
+
+        await EmailService.EnviarEmailAsync(
+        "umtaljota@icloud.com",
+        "Pedido aprovado pelo Gestor",
+        $"O pedido RMA nº {pedido.ID} foi aprovado pelo gestor e aguarda aprovacão do administrador.");
 
         pedidos = await RmaService.GetByEstadoAsync(1);
     }
